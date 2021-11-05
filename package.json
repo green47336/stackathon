@@ -1,7 +1,7 @@
 {
-  "name": "fs-app-template",
-  "version": "2.0.0",
-  "description": "Some boilerplate code to get you started - get shakin'!",
+  "name": "stackathon",
+  "version": "1.0.0",
+  "description": "Hopefully a piano or something you and your friends can annoy each other with",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -17,7 +17,7 @@
     "test:dev:models": "npm run test:dev -- --grep=model",
     "test:dev:routes": "npm run test:dev -- --grep=route"
   },
-  "author": "Fullstack Academy of Code",
+  "author": "Alex Green",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
@@ -26,9 +26,13 @@
     "express": "^4.16.4",
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
+    "jzz": "^1.4.5",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "socket.io": "^4.3.1",
+    "socket.io-client": "^4.3.2",
+    "ws": "^8.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
