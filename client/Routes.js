@@ -11,7 +11,7 @@ class Routes extends Component {
   componentDidMount() {}
 
   render() {
-    const socket = io.connect("http://localhost:8080");
+    const socket = io.connect(location.origin || "http://localhost:8080");
 
     //const hello = new Audio(document.getElementById("hello").src);
     const helloAudio = new Audio(`../audio/hello.mp3`)
