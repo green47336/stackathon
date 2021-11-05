@@ -12,6 +12,7 @@ const init = async () => {
     else {
       await db.sync()
     }
+    //anything
     // start listening (and create a 'server' object representing our server)
     const server = app.listen(PORT, () => console.log(`Tuning the instruments on port ${PORT}`))
 
