@@ -13,36 +13,101 @@ class Routes extends Component {
   render() {
     const whereWeAt = location.origin.slice(7, 16);
     console.log("Current location", whereWeAt);
-    const whereToConnect = whereWeAt === "localhost"
-    ? "http://localhost:8080/"
-    : "https://socket-piano.herokuapp.com"
+    const whereToConnect =
+      whereWeAt === "localhost"
+        ? "http://localhost:8080/"
+        : "https://socket-piano.herokuapp.com";
     const socket = io.connect(whereToConnect);
 
-    //const hello = new Audio(document.getElementById("hello").src);
     const helloAudio = new Audio(`../audio/hello.mp3`);
-    //hello.play();
+    const c4Audio = new Audio(`../audio/c4.mp3`);
+    const cSharp4Audio = new Audio(`../audio/cSharp4.mp3`);
+    const d4Audio = new Audio(`../audio/d4.mp3`);
+    const dSharp4Audio = new Audio(`../audio/dSharp4.mp3`);
+    const e4Audio = new Audio(`../audio/e4.mp3`);
+    const f4Audio = new Audio(`../audio/f4.mp3`);
+    const fSharp4Audio = new Audio(`../audio/fSharp4.mp3`);
+    const g4Audio = new Audio(`../audio/g4.mp3`);
+    const gSharp4Audio = new Audio(`../audio/gSharp4.mp3`);
+    const a4Audio = new Audio(`../audio/a4.mp3`);
+    const aSharp4Audio = new Audio(`../audio/aSharp4.mp3`);
+    const b4Audio = new Audio(`../audio/b4.mp3`);
+    const c5Audio = new Audio(`../audio/c5.mp3`);
 
     socket.on("connect", () => {
       console.log(`Connected with ID: ${socket.id}!`);
     });
 
+    const keys = [
+      "C-4",
+      "Db/C#-4",
+      "D-4",
+      "Eb/D#-4",
+      "E-4",
+      "F-4",
+      "Gb/F#-4",
+      "G-4",
+      "Ab/G#-4",
+      "A-4",
+      "Bb/A#-4",
+      "B-4",
+      "C-5",
+    ];
+
     socket.on("playNote", (note) => {
-      console.log("socket.on playNote fires");
+      console.log("note", note);
       switch (note) {
         case "hello":
           return helloAudio.play();
+        case "C-4":
+          return c4Audio.play();
+        case "Db/C#-4":
+          return cSharp4Audio.play();
+        case "D-4":
+          return d4Audio.play();
+        case "Eb/D#-4":
+          return dSharp4Audio.play();
+        case "E-4":
+          return e4Audio.play();
+        case "F-4":
+          return f4Audio.play();
+        case "Gb/F#-4":
+          return fSharp4Audio.play();
+        case "G-4":
+          return g4Audio.play();
+        case "Ab/G#-4":
+          return gSharp4Audio.play();
+        case "A-4":
+          return a4Audio.play();
+        case "Bb/A#-4":
+          return aSharp4Audio.play();
+        case "B-4":
+          return b4Audio.play();
+        case "C-5":
+          return c5Audio.play();
         default:
           return console.log("default case");
       }
     });
 
     socket.on("shout", () => {
-      console.log("Hey, everyone!");
+      console.log("Hello, everyone!");
     });
 
+    const handleClick = (ev) => {
+      socket.emit("playNote", ev.target.id);
+    };
+
     return (
-      <div>
-        <audio id="hello" src={`../audio/hello.mp3`} />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
+        {/* <audio id="hello" src={`../audio/hello.mp3`} /> */}
         <h1
           onClick={() => {
             console.log("click");
@@ -51,8 +116,17 @@ class Routes extends Component {
             socket.emit("shout");
           }}
         >
-          b0oba
+          Hello
         </h1>
+        <div id="piano">
+          {keys.map((key) => {
+            return (
+              <button id={key} key={key} onClick={handleClick}>
+                {key}
+              </button>
+            );
+          })}
+        </div>
         <Switch>
           <Route path="/home" component={Home} />
         </Switch>
