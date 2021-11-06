@@ -24,9 +24,13 @@ const init = async () => {
       console.log("Connected", socket.id)
       //socket.emit('history', history);
       socket.on('playNote', (note)=> {
-        socket.emit('playNote', note);
+        console.log('emitting note')
+        socketServer.emit('playNote', note);
         //socket.broadcast.emit
       });
+      socket.on("shout", ()=>{
+        socketServer.emit("shout")
+      })
     });
 
 

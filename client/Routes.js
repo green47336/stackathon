@@ -11,7 +11,7 @@ class Routes extends Component {
   componentDidMount() {}
 
   render() {
-    const socket = io.connect(location.origin || "http://localhost:8080");
+    const socket = io.connect("http://localhost:8080");
 
     //const hello = new Audio(document.getElementById("hello").src);
     const helloAudio = new Audio(`../audio/hello.mp3`)
@@ -31,6 +31,10 @@ class Routes extends Component {
       }
     });
 
+    socket.on("shout", () => {
+      console.log("Hey, everyone!")
+    })
+
     return (
       <div>
         <audio id='hello' src={`../audio/hello.mp3`}/>
@@ -39,6 +43,7 @@ class Routes extends Component {
             console.log('click')
             let note = "hello"
             socket.emit("playNote", note);
+            socket.emit("shout")
           }}
         >
           b0oba
