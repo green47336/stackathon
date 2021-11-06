@@ -13,11 +13,10 @@ class Routes extends Component {
   render() {
     const whereWeAt = location.origin.slice(7, 16);
     console.log("Current location", whereWeAt);
-    const socket = io.connect(
-      whereWeAt === "localhost"
-        ? "https://http://localhost:8080/"
-        : "https://socket-piano.herokuapp.com"
-    );
+    const whereToConnect = whereWeAt === "localhost"
+    ? "http://localhost:8080/"
+    : "https://socket-piano.herokuapp.com"
+    const socket = io.connect(whereToConnect);
 
     //const hello = new Audio(document.getElementById("hello").src);
     const helloAudio = new Audio(`../audio/hello.mp3`);
