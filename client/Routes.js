@@ -6,12 +6,11 @@ import socket from "./whereWeAt";
 import { localPlay } from "./localPlay";
 import { Howl, Howler } from "howler";
 import { keys, noteToKey, keyToNote } from "./keyConstants";
-import * as Tone from 'tone'
-import {Piano} from '@tonejs/piano'
+import * as Tone from "tone";
+import { Piano } from "@tonejs/piano";
 import { Synth } from "tone";
 
-import {synth} from './keyConstants'
-
+import { synth } from "./keyConstants";
 
 /**
  * COMPONENT
@@ -26,7 +25,6 @@ class Routes extends Component {
   }
 
   componentDidMount() {
-
     window.addEventListener("keydown", this.handleKeyDown);
     window.addEventListener("keyup", this.handleKeyUp);
   }
@@ -84,44 +82,44 @@ class Routes extends Component {
         case "hello":
           return helloAudio.play();
         case "C-4":
-          return synth.triggerAttackRelease("C4", "8n")
-          //return c4Audio.play();
+          return synth.triggerAttackRelease("C4", "8n");
+        //return c4Audio.play();
         case "Db/C#-4":
-          return synth.triggerAttackRelease("C#4", "8n")
-          //return cSharp4Audio.play();
+          return synth.triggerAttackRelease("C#4", "8n");
+        //return cSharp4Audio.play();
         case "D-4":
-          return synth.triggerAttackRelease("D4", "8n")
-          //return d4Audio.play();
+          return synth.triggerAttackRelease("D4", "8n");
+        //return d4Audio.play();
         case "Eb/D#-4":
-          return synth.triggerAttackRelease("D#4", "8n")
-          //return dSharp4Audio.play();
+          return synth.triggerAttackRelease("D#4", "8n");
+        //return dSharp4Audio.play();
         case "E-4":
-          return synth.triggerAttackRelease("E4", "8n")
-          //return e4Audio.play();
+          return synth.triggerAttackRelease("E4", "8n");
+        //return e4Audio.play();
         case "F-4":
-          return synth.triggerAttackRelease("F4", "8n")
-          //return f4Audio.play();
+          return synth.triggerAttackRelease("F4", "8n");
+        //return f4Audio.play();
         case "Gb/F#-4":
-          return synth.triggerAttackRelease("F#4", "8n")
-          //return fSharp4Audio.play();
+          return synth.triggerAttackRelease("F#4", "8n");
+        //return fSharp4Audio.play();
         case "G-4":
-          return synth.triggerAttackRelease("G4", "8n")
-          //return g4Audio.play();
+          return synth.triggerAttackRelease("G4", "8n");
+        //return g4Audio.play();
         case "Ab/G#-4":
-          return synth.triggerAttackRelease("G#4", "8n")
-          //return gSharp4Audio.play();
+          return synth.triggerAttackRelease("G#4", "8n");
+        //return gSharp4Audio.play();
         case "A-4":
-          return synth.triggerAttackRelease("A4", "8n")
-          //return a4Audio.play();
+          return synth.triggerAttackRelease("A4", "8n");
+        //return a4Audio.play();
         case "Bb/A#-4":
-          return synth.triggerAttackRelease("A#4", "8n")
-          //return aSharp4Audio.play();
+          return synth.triggerAttackRelease("A#4", "8n");
+        //return aSharp4Audio.play();
         case "B-4":
-          return synth.triggerAttackRelease("B4", "8n")
-          //return b4Audio.play();
+          return synth.triggerAttackRelease("B4", "8n");
+        //return b4Audio.play();
         case "C-5":
-          return synth.triggerAttackRelease("C5", "8n")
-          //return c5Audio.play();
+          return synth.triggerAttackRelease("C5", "8n");
+        //return c5Audio.play();
         default:
           return console.log("default case");
       }
@@ -145,9 +143,13 @@ class Routes extends Component {
           flexDirection: "column",
         }}
       >
-                  <button onClick={() => {
-                    synth.triggerAttackRelease('C4', '16n')
-                  }}>C4</button>
+        {/* <button
+          onClick={() => {
+            synth.triggerAttackRelease("C4", "16n");
+          }}
+        >
+          C4
+        </button> */}
 
         <div
           id="piano2"
@@ -212,9 +214,7 @@ class Routes extends Component {
  * CONTAINER
  */
 const mapState = (state) => {
-  return {
-
-  };
+  return {};
 };
 
 const mapDispatch = (dispatch) => {
