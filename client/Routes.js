@@ -29,7 +29,6 @@ class Routes extends Component {
   }
 
   handleKeyDown = (ev) => {
-    console.log("handleKeyDown", ev.target.id);
     if (ev.repeat) {
       return;
     }
@@ -40,21 +39,16 @@ class Routes extends Component {
         pressedKeys: [...this.state.pressedKeys, ev.key],
       },
       () => {
-        console.log(JSON.stringify(this.state));
         //localPlay(keyToNote[key]);
         socket.emit("playNote", keyToNote[key]);
       }
     );
-    console.log(JSON.stringify(this.state));
   };
 
   handleKeyUp = (ev) => {
     const pressedKeys = this.state.pressedKeys;
-    console.log("handleKeyUp", ev.key);
     const filteredKeys = pressedKeys.filter((key) => key !== ev.key);
-    this.setState({ ...this.state, pressedKeys: filteredKeys }, () => {
-      console.log(JSON.stringify(this.state));
-    });
+    this.setState({ ...this.state, pressedKeys: filteredKeys });
   };
 
   render() {
