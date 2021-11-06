@@ -130,7 +130,7 @@ class Routes extends Component {
     });
 
     const handleClick = (ev) => {
-      localPlay(ev.target.id);
+      //localPlay(ev.target.id);
       socket.emit("playNote", ev.target.id);
     };
 
