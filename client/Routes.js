@@ -175,7 +175,7 @@ class Routes extends Component {
                   justifyContent: "flex-end",
                 }}
               >
-                <p style={{margin: "5px"}}>{key}</p> <p style={{margin: "5px"}}>{`-${noteToKey[key]}-`}</p>
+                <p style={{margin: "5px", pointerEvents: 'none'}}>{key}</p> <p style={{margin: "5px", pointerEvents: 'none'}}>{`-${noteToKey[key]}-`}</p>
               </div>
             ) : (
               <div
@@ -197,7 +197,7 @@ class Routes extends Component {
                   justifyContent: "flex-end",
                 }}
               >
-                <p style={{margin: "5px"}}>{key}</p> <p style={{margin: "5px"}}>{`-${noteToKey[key]}-`}</p>
+                <p style={{margin: "5px", pointerEvents: 'none'}}>{key}</p> <p style={{margin: "5px", pointerEvents: 'none'}}>{`-${noteToKey[key]}-`}</p>
               </div>
             );
           })}
