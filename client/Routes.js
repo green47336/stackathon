@@ -1,28 +1,72 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, useState } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./components/Home";
-import io from "socket.io-client";
+import socket from "./whereWeAt";
 import { localPlay } from "./localPlay";
+import { Howl, Howler } from "howler";
+import {keys, noteToKey, keyToNote} from "./keyConstants"
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
-  componentDidMount() {}
+  constructor(props) {
+    super(props);
+    this.state = {
+      pressedKeys: [],
+    };
+  }
+
+  componentDidMount() {
+      window.addEventListener('keydown', this.handleKeyDown);
+      window.addEventListener('keyup', this.handleKeyUp);
+      console.log(JSON.stringify(keyToNote))
+  }
+
+  handleKeyDown = (ev) => {
+    console.log("handleKeyDown", ev.target.id);
+    if (ev.repeat) {
+      return;
+    }
+    const key = ev.key;
+    this.setState({
+      ...this.state,
+      pressedKeys: [...this.state.pressedKeys, ev.key],
+    }, () => {
+      console.log(JSON.stringify(this.state))
+      localPlay(keyToNote[key]);
+      socket.emit("playNote", keyToNote[key]);
+    });
+    console.log(JSON.stringify(this.state));
+  };
+
+  handleKeyUp = (ev) => {
+    const pressedKeys = this.state.pressedKeys
+    console.log("handleKeyUp", ev.key);
+    const filteredKeys = pressedKeys.filter((key) =>
+      key !== ev.key)
+    this.setState({ ...this.state, pressedKeys: filteredKeys }, () => {console.log(JSON.stringify(this.state))});
+    ;
+  };
 
   render() {
-    const whereWeAt = location.origin.slice(7, 16);
-    console.log("Current location", whereWeAt);
-    const whereToConnect =
-      whereWeAt === "localhost"
-        ? "http://localhost:8080/"
-        : "https://socket-piano.herokuapp.com";
-    const socket = io.connect(whereToConnect);
+    // const whereWeAt = location.origin.slice(7, 16);
+    // console.log("Current location", whereWeAt);
+    // const whereToConnect =
+    //   whereWeAt === "localhost"
+    //     ? "http://localhost:8080/"
+    //     : "https://socket-piano.herokuapp.com";
+    // export const socket = io.connect(whereToConnect);
+    
+    // socket.on("connect", () => {
+    //   console.log(`Connected with ID: ${socket.id}!`);
+    // });
 
     const helloAudio = new Audio(`../audio/hello.mp3`);
-    const c4Audio = new Audio(`../audio/c4.mp3`);
+    const c4Audio = new Howl({ src: [`../audio/c4.mp3`], html5: true });
     const cSharp4Audio = new Audio(`../audio/cSharp4.mp3`);
+    cSharp4Audio.playbackRate = 5;
     const d4Audio = new Audio(`../audio/d4.mp3`);
     const dSharp4Audio = new Audio(`../audio/dSharp4.mp3`);
     const e4Audio = new Audio(`../audio/e4.mp3`);
@@ -35,9 +79,6 @@ class Routes extends Component {
     const b4Audio = new Audio(`../audio/b4.mp3`);
     const c5Audio = new Audio(`../audio/c5.mp3`);
 
-    socket.on("connect", () => {
-      console.log(`Connected with ID: ${socket.id}!`);
-    });
 
     const keys = [
       "C-4",
@@ -54,6 +95,24 @@ class Routes extends Component {
       "B-4",
       "C-5",
     ];
+
+    // const noteToKey = {
+    //   "C-4": "s",
+    //   "Db/C#-4": "e",
+    //   "D-4": "d",
+    //   "Eb/D#-4": "r",
+    //   "E-4": "f",
+    //   "F-4": "g",
+    //   "Gb/F#-4": "y",
+    //   "G-4": "h",
+    //   "Ab/G#-4": "u",
+    //   "A-4": "j",
+    //   "Bb/A#-4": "i",
+    //   "B-4": "k",
+    //   "C-5": "l",
+    // };
+
+
 
     socket.on("playNote", (note) => {
       console.log("note", note);
@@ -98,7 +157,7 @@ class Routes extends Component {
     const handleClick = (ev) => {
       localPlay(ev.target.id);
       socket.emit("playNote", ev.target.id);
-    };
+    }
 
     return (
       <div
@@ -129,12 +188,58 @@ class Routes extends Component {
             );
           })}
         </div> */}
-        <div id="piano2" style={{display: 'flex', flexDirection: 'row', marginTop: '1rem'}}>
+        <div
+          id="piano2"
+          style={{ display: "flex", flexDirection: "row", marginTop: "1rem" }}
+        >
           {keys.map((key) => {
             return key.includes("#") ? (
-              <div onClick={handleClick} id={key} key={key} style={{border: '1px solid gray', marginRight: "-31px", marginLeft: "-31px", color: "white", background: 'black', height: "300px", width: "60px", zIndex: '2', position: 'relative', display: 'flex', alignItems: 'flex-end', justifyContent: 'center'}}>{key}</div>
+              <div
+                onKeyDown={this.handleKeyDown}
+                onKeyUp={this.handleKeyUp}
+                onClick={handleClick}
+                id={key}
+                key={key}
+                style={{
+                  border: "1px solid gray",
+                  marginRight: "-31px",
+                  marginLeft: "-31px",
+                  color: "white",
+                  background: "black",
+                  height: "300px",
+                  width: "60px",
+                  zIndex: "2",
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                }}
+              >
+                {key}
+              </div>
             ) : (
-              <div onClick={handleClick} id={key} key={key} style={{border: '1px solid gray', color: 'black', background: 'ivory', height: "500px", width: "100px", position: 'relative', marginLeft: '0px', marginRight: '0px', display: 'flex', alignItems: 'flex-end', justifyContent: 'center'}}>{key}</div>
+              <div
+                onKeyDown={this.handleKeyDown}
+                onKeyUp={this.handleKeyUp}
+                onClick={handleClick}
+                id={key}
+                key={key}
+                style={{
+                  border: "1px solid gray",
+                  color: "black",
+                  background: "ivory",
+                  height: "500px",
+                  width: "100px",
+                  position: "relative",
+                  marginLeft: "0px",
+                  marginRight: "0px",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                }}
+              >
+                {key}
+              </div>
             );
           })}
         </div>

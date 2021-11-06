@@ -25,6 +25,7 @@
     "compression": "^1.7.3",
     "express": "^4.16.4",
     "history": "^4.9.0",
+    "howler": "^2.2.3",
     "jsonwebtoken": "^8.5.1",
     "jzz": "^1.4.5",
     "morgan": "^1.9.1",
