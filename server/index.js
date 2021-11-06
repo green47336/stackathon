@@ -12,8 +12,7 @@ const init = async () => {
     else {
       await db.sync()
     }
-    //anything
-    // start listening (and create a 'server' object representing our server)
+
     const server = app.listen(PORT, () => console.log(`Tuning the instruments on port ${PORT}`))
 
 
@@ -26,10 +25,9 @@ const init = async () => {
 
     socketServer.on('connection', (socket)=> {
       console.log("Connected", socket.id)
-      //socket.emit('history', history);
       socket.on('playNote', (note)=> {
         console.log('emitting note')
-        socketServer.emit('playNote', note);
+        socket.broadcast.emit('playNote', note);
         //socket.broadcast.emit
       });
       socket.on("shout", ()=>{

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import Home from "./components/Home";
 import io from "socket.io-client";
+import { localPlay } from "./localPlay";
 
 /**
  * COMPONENT
@@ -95,6 +96,7 @@ class Routes extends Component {
     });
 
     const handleClick = (ev) => {
+      localPlay(ev.target.id)
       socket.emit("playNote", ev.target.id);
     };
 
