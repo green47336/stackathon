@@ -150,6 +150,7 @@ class Routes extends Component {
         >
           C4
         </button> */}
+        <div style={{color: 'white'}}>{JSON.stringify(this.state.pressedKeys)}</div>
 
         <div
           id="piano2"
