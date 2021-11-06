@@ -11,39 +11,45 @@ class Routes extends Component {
   componentDidMount() {}
 
   render() {
-    const socket = io.connect("https://socket-piano.herokuapp.com");
+    const whereWeAt = location.origin.slice(7, 16);
+    console.log("Current location", whereWeAt);
+    const socket = io.connect(
+      whereWeAt === "localhost"
+        ? "https://http://localhost:8080/"
+        : "https://socket-piano.herokuapp.com"
+    );
 
     //const hello = new Audio(document.getElementById("hello").src);
-    const helloAudio = new Audio(`../audio/hello.mp3`)
+    const helloAudio = new Audio(`../audio/hello.mp3`);
     //hello.play();
 
     socket.on("connect", () => {
       console.log(`Connected with ID: ${socket.id}!`);
     });
 
-    socket.on("playNote", note => {
-      console.log('socket.on playNote fires')
+    socket.on("playNote", (note) => {
+      console.log("socket.on playNote fires");
       switch (note) {
-        case 'hello':
-          return helloAudio.play()
+        case "hello":
+          return helloAudio.play();
         default:
-          return console.log('default case')
+          return console.log("default case");
       }
     });
 
     socket.on("shout", () => {
-      console.log("Hey, everyone!")
-    })
+      console.log("Hey, everyone!");
+    });
 
     return (
       <div>
-        <audio id='hello' src={`../audio/hello.mp3`}/>
+        <audio id="hello" src={`../audio/hello.mp3`} />
         <h1
           onClick={() => {
-            console.log('click')
-            let note = "hello"
+            console.log("click");
+            let note = "hello";
             socket.emit("playNote", note);
-            socket.emit("shout")
+            socket.emit("shout");
           }}
         >
           b0oba
