@@ -110,7 +110,7 @@ class Routes extends Component {
         }}
       >
         {/* <audio id="hello" src={`../audio/hello.mp3`} /> */}
-        <h3
+        {/* <h3
           onClick={() => {
             console.log("click");
             let note = "hello";
@@ -119,7 +119,7 @@ class Routes extends Component {
           }}
         >
           Hello
-        </h3>
+        </h3> */}
         {/* <div id="piano">
           {keys.map((key) => {
             return (
