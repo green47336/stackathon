@@ -1,3 +1,6 @@
+import * as Tone from 'tone'
+import {Synth} from 'tone'
+
 const keys = [
     "C-4",
     "Db/C#-4",
@@ -46,4 +49,6 @@ const keys = [
     "l": "C-5"
   }
 
-  export {keys, noteToKey, keyToNote}
+  const synth = new Synth().toDestination();
+
+  export {keys, noteToKey, keyToNote, synth}
