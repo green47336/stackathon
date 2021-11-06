@@ -2,7 +2,11 @@ const { db } = require('./db')
 const PORT = process.env.PORT || 8080
 const app = require('./app')
 const seed = require('../script/seed');
-const {Server} = require('socket.io') //This might need the CORS treatment for deployment
+const {Server} = require('socket.io')({
+  cors: {
+    origin: ["https://socket-piano.herokuapp.com/"]
+  }
+}) //This might need the CORS treatment for deployment
 
 const init = async () => {
   try {
