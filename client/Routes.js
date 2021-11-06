@@ -20,7 +20,6 @@ class Routes extends Component {
     super(props);
     this.state = {
       pressedKeys: [],
-      color: "",
     };
   }
 
@@ -30,7 +29,6 @@ class Routes extends Component {
   }
 
   handleKeyDown = (ev) => {
-    this.setState({ ...this.state, color: "gray" });
     console.log("handleKeyDown", ev.target.id);
     if (ev.repeat) {
       return;
@@ -51,7 +49,6 @@ class Routes extends Component {
   };
 
   handleKeyUp = (ev) => {
-    this.setState({ ...this.state, color: "" });
     const pressedKeys = this.state.pressedKeys;
     console.log("handleKeyUp", ev.key);
     const filteredKeys = pressedKeys.filter((key) => key !== ev.key);
@@ -173,11 +170,12 @@ class Routes extends Component {
                   zIndex: "2",
                   position: "relative",
                   display: "flex",
-                  alignItems: "flex-end",
-                  justifyContent: "center",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
                 }}
               >
-                {key}
+                <p style={{margin: "5px"}}>{key}</p> <p style={{margin: "5px"}}>{`-${noteToKey[key]}-`}</p>
               </div>
             ) : (
               <div
@@ -194,11 +192,12 @@ class Routes extends Component {
                   marginLeft: "0px",
                   marginRight: "0px",
                   display: "flex",
-                  alignItems: "flex-end",
-                  justifyContent: "center",
+                  flexDirection: 'column',
+                  alignItems: "center",
+                  justifyContent: "flex-end",
                 }}
               >
-                {key}
+                <p style={{margin: "5px"}}>{key}</p> <p style={{margin: "5px"}}>{`-${noteToKey[key]}-`}</p>
               </div>
             );
           })}

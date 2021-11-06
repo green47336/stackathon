@@ -27,7 +27,7 @@ export const localPlay = (note) => {
       case "hello":
         return helloAudio.play();
       case "C-4":
-        return synth.triggerAttackRelease("C4", "+0", 0, Math.random())
+        return synth.triggerAttackRelease("C4", "8n")
         //return c4Audio.play();
       case "Db/C#-4":
         return synth.triggerAttackRelease("C#4", "8n")
