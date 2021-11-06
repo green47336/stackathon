@@ -19,7 +19,7 @@ const init = async () => {
 
     const socketServer = new Server(server, {
       cors: {
-        origin: "https://socket-piano.herokuapp.com/"
+        origin: "http://socket-piano.herokuapp.com/"
       }
     });
 
