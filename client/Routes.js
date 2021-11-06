@@ -129,7 +129,7 @@ class Routes extends Component {
             );
           })}
         </div> */}
-        <div id="piano2" style={{display: 'flex', flexDirection: 'row'}}>
+        <div id="piano2" style={{display: 'flex', flexDirection: 'row', marginTop: '1rem'}}>
           {keys.map((key) => {
             return key.includes("#") ? (
               <div onClick={handleClick} id={key} key={key} style={{border: '1px solid gray', marginRight: "-31px", marginLeft: "-31px", color: "white", background: 'black', height: "300px", width: "60px", zIndex: '2', position: 'relative', display: 'flex', alignItems: 'flex-end', justifyContent: 'center'}}>{key}</div>
