@@ -11,7 +11,7 @@ class Routes extends Component {
   componentDidMount() {}
 
   render() {
-    const socket = io.connect("https://socket-piano.herokuapp.com/");
+    const socket = io.connect("https://socket-piano.herokuapp.com");
 
     //const hello = new Audio(document.getElementById("hello").src);
     const helloAudio = new Audio(`../audio/hello.mp3`)
