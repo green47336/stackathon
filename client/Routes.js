@@ -10,12 +10,14 @@ import * as Tone from 'tone'
 import {Piano} from '@tonejs/piano'
 import { Synth } from "tone";
 
+import {synth} from './keyConstants'
+
+
 /**
  * COMPONENT
  */
 class Routes extends Component {
   constructor(props) {
-    const synth = new Synth().toDestination();
     super(props);
     this.state = {
       pressedKeys: [],
@@ -24,14 +26,9 @@ class Routes extends Component {
   }
 
   componentDidMount() {
-    const piano = new Piano().toDestination();
 
     window.addEventListener("keydown", this.handleKeyDown);
     window.addEventListener("keyup", this.handleKeyUp);
-    let color;
-    piano.load().then(() => {
-      console.log('Piano loaded!')
-  })
   }
 
   handleKeyDown = (ev) => {
@@ -48,7 +45,7 @@ class Routes extends Component {
       },
       () => {
         console.log(JSON.stringify(this.state));
-        localPlay(keyToNote[key]);
+        //localPlay(keyToNote[key]);
         socket.emit("playNote", keyToNote[key]);
       }
     );
@@ -149,8 +146,6 @@ class Routes extends Component {
         }}
       >
                   <button onClick={() => {
-                        const synth = new Synth().toDestination();
-
                     synth.triggerAttackRelease('C4', '16n')
                   }}>C4</button>
 
