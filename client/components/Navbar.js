@@ -14,7 +14,7 @@ const Navbar = () => (
       }}
     >
       <h1>Socket Piano</h1>
-      <h4>by Alex Green - November 2021</h4>
+      <h4>by Alex Green</h4>
       <nav>{/* <h3>Navbar stuff</h3> */}</nav>
     </div>
     <hr />
